@@ -3,8 +3,10 @@ FROM debian
 
 # remove the docker setups from apt.  this has a considerable impact on docker image size.
 RUN rm -f /etc/apt/apt.conf.d/docker-*
+#ADD keyboard-configuration.debconf /tmp/keyboard-configuration.debconf
+#RUN debconf-set-selections < /tmp/keyboard-configuration.debconf
 
 # ensure all packages listed by 'dpkg --get-selections | grep -v deinstall' of a fresh debian are installed
-RUN (DEBIAN_FRONTEND=noninteractive; apt-get update && apt-get install -y python cron
+RUN (DEBIAN_FRONTEND=noninteractive; apt-get update && apt-get install -y python cron)
 
 CMD ["/bin/bash"]
